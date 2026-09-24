@@ -15,10 +15,11 @@ for(const f of FORMS){
   ch.push(new Paragraph({spacing:{before:200},children:[new TextRun({text:title,bold:true})]}));
   if(t==='mc'||t==='cb')it[3].forEach((c,i)=>ch.push(new Paragraph({children:[new TextRun(`${L[i]}. ${c}`)]})));
   if(t==='scale')ch.push(new Paragraph({children:[new TextRun({text:`【評分題】${it[3]}＝${it[5]}，${it[4]}＝${it[6]}（匯入後請改成「評分」題型）`,color:'555555'})]}));
+  if(t==='date')ch.push(new Paragraph({children:[new TextRun({text:'【日期題】匯入後請改成「日期」題型',color:'555555'})]}));
   if(t==='grid'){ch.push(new Paragraph({children:[new TextRun({text:`【Likert 題】列：${it[3].join('、')}；欄：${it[4].join('、')}（匯入後請改成「Likert」題型）`,color:'555555'})]}));}
-  const help=(t==='text'||t==='para')?it[3]:(t==='mc'||t==='cb')?it[4]:t==='grid'?it[5]:'';
+  const help=(t==='text'||t==='para'||t==='date')?it[3]:(t==='mc'||t==='cb')?it[4]:t==='grid'?it[5]:'';
   if(help)ch.push(new Paragraph({children:[new TextRun({text:help,color:'555555'})]}));
  }
  const doc=new Document({styles:{default:{document:{run:{font:'Microsoft JhengHei',size:22}}}},sections:[{children:ch}]});
- Packer.toBuffer(doc).then(b=>{fs.writeFileSync(`${f.id==='canvas'?'畢專策略畫布_MicrosoftForms匯入':'AI校準作業_MicrosoftForms匯入'}.docx`,b);console.log('written',f.id,q,'questions')});
+ Packer.toBuffer(doc).then(b=>{fs.writeFileSync('回家作業_MicrosoftForms匯入.docx',b);console.log('written',f.id,q,'questions')});
 }

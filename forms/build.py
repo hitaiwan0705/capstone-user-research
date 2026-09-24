@@ -1,8 +1,8 @@
 import json
 from spec import FORMS
 def js(s): return json.dumps(s,ensure_ascii=False)
-out=['/**',' * 畢專使用者研究｜自動建立 Google 表單（含回應試算表）',' * 使用方式：到 script.google.com 新增專案 → 貼上全部程式碼 → 選擇 createAllForms → 執行 → 授權。',' * 執行完成後，到「執行紀錄」複製表單網址。表單與試算表會出現在你的 Google 雲端硬碟根目錄。',' * 本檔由 forms/build.py 從 forms/spec.py 產生，修改題目請改 spec.py 再重新產生。',' */','',
-'function createAllForms() {','  createStrategyCanvasForm();','  createCalibrationForm();','}','',
+out=['/**',' * 畢專使用者研究｜自動建立 Google 表單（含回應試算表）',' * 使用方式：到 script.google.com 新增專案 → 貼上全部程式碼 → 選擇 createAllForms → 執行 → 授權（會建立「畢專使用者研究｜回家作業」與回應試算表）。',' * 執行完成後，到「執行紀錄」複製表單網址。表單與試算表會出現在你的 Google 雲端硬碟根目錄。',' * 本檔由 forms/build.py 從 forms/spec.py 產生，修改題目請改 spec.py 再重新產生。',' */','',
+'function createAllForms() {']+['  '+f['fn']+'();' for f in FORMS]+['}','',
 'function finish_(form) {',
 '  // 2026 年起 Google 可能將程式建立的表單預設為「未發布」；若有此方法就直接發布',
 "  if (typeof form.setPublished === 'function') { try { form.setPublished(true); } catch (e) { Logger.log('請手動按「發布」：' + e); } }",
@@ -32,6 +32,8 @@ for f in FORMS:
             L.append(s+";")
         elif t=='grid':
             L.append(f"  form.addGridItem().setTitle({js(it[1])}).setRequired({str(it[2]).lower()}).setHelpText({js(it[5])}).setRows({js(it[3])}).setColumns({js(it[4])});")
+        elif t=='date':
+            L.append(f"  form.addDateItem().setTitle({js(it[1])}).setRequired({str(it[2]).lower()}).setHelpText({js(it[3])});")
         elif t=='scale':
             L.append(f"  form.addScaleItem().setTitle({js(it[1])}).setRequired({str(it[2]).lower()}).setBounds({it[3]}, {it[4]}).setLabels({js(it[5])}, {js(it[6])});")
     L+=['  finish_(form);','}','']

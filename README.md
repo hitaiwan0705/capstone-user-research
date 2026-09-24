@@ -10,6 +10,6 @@
 
 ## 視覺與圖表規範
 
-- 色彩與字體：[mono-color](https://github.com/hitaiwan0705/mono-color-skill) CIS（Charcoal＋Signal Red 二油墨，Neutral White 紙面）。中文用思源黑體 Noto Sans CJK；需要個性時（主標、提問句）用思源宋體 Noto Serif CJK。
+- 色彩與字體：[mono-color](https://github.com/hitaiwan0705/mono-color-skill) CIS（Charcoal＋Signal Red 二油墨，Neutral White 紙面）。中文全部使用思源黑體 Noto Sans CJK。
 - 圖表：依 [diagram-design](https://github.com/hitaiwan0705/diagram-design) 規範繪製，原始檔與產生器在 `diagrams/`，專案設定檔在 `design/`、`.diagram-design`。
 - 無障礙：WCAG 2.1 AA（axe-core 0 違規）。

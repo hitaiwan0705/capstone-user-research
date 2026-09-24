@@ -81,20 +81,20 @@ A self-contained palette for the terminal-window primitive (see [primitive-termi
 
 | Role | Family | Size | Weight | Usage |
 |---|---|---|---|---|
-| `title` | 思源宋體 Noto Serif CJK / Noto Serif TC | 1.75rem | 900 | Page H1 (personality moment) |
+| `title` | IBM Plex Sans + 思源黑體 Noto Sans CJK | 1.75rem | 700 | Page H1 |
 | `node-name` | IBM Plex Sans + 思源黑體 Noto Sans CJK | 16px | 600 | Human-readable labels (CJK floor 12px) |
 | `sublabel` | IBM Plex Sans + Noto Sans CJK | 12px | 400 | Secondary line inside a node |
 | `eyebrow` | IBM Plex Mono | 12px | 500, tracked 0.12em, uppercase (Latin only) | Type tags, axis labels |
 | `arrow-label` | IBM Plex Sans + Noto Sans CJK | 12px | 500, no tracking, 16px mask | Arrow annotations |
-| `callout` | Noto Serif CJK | 16px | 600 | Editorial asides only |
+| `callout` | IBM Plex Sans + Noto Sans CJK | 16px | 500 | Editorial asides only |
 
 ### Font stack
 
 ```html
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
 ```
 
-Font stacks: sans `'IBM Plex Sans', 'Noto Sans CJK TC', 'Noto Sans TC', sans-serif`; serif `'Noto Serif CJK TC', 'Noto Serif TC', serif`; mono `'IBM Plex Mono', monospace` (Latin technical strings only). Traditional Chinese labels follow the Korean-label rules below: 1em per full-width character, 12px floor, no uppercase or tracking, 16px-tall masks.
+Font stacks: sans `'IBM Plex Sans', 'Noto Sans CJK TC', 'Noto Sans TC', sans-serif`; mono `'IBM Plex Mono', monospace` (Latin technical strings only). Traditional Chinese labels follow the Korean-label rules below: 1em per full-width character, 12px floor, no uppercase or tracking, 16px-tall masks.
 
 ### Korean labels (reference; Traditional Chinese follows the same metrics with Noto Sans CJK TC)
 
@@ -116,7 +116,7 @@ Three rules follow from Hangul metrics:
 - **Floor of 12px.** Hangul goes muddy below 12px. If a Korean name doesn't fit at 12px, cut the name — don't shrink the type.
 - **Arrow labels, eyebrows, and legend text switch register.** Those slots are 7–8px Geist Mono, uppercase and tracked, which Hangul has neither a face nor legibility for. A Korean label in one of those slots becomes 12px sans at weight 500 with no tracking and no uppercase transform, and its mask rect grows to match (16px tall, width from the budget above, still rounded to a multiple of 4). Latin labels in the same diagram keep the mono treatment.
 
-**Load-bearing rule:** Mono (IBM Plex Mono) is for *technical* Latin content only. Names go in IBM Plex Sans + 思源黑體 Noto Sans CJK. Page title is 思源宋體 Noto Serif CJK. Noto Serif CJK is also reserved for annotation callouts (see [primitive-annotation.md](primitive-annotation.md)). **Never JetBrains Mono** as a blanket "dev" font.
+**Load-bearing rule:** Mono (IBM Plex Mono) is for *technical* Latin content only. Names go in IBM Plex Sans + 思源黑體 Noto Sans CJK. Page title and annotation callouts also use IBM Plex Sans + Noto Sans CJK (this profile uses no serif for now; see the mono-color skill for when Noto Serif CJK is allowed) (see [primitive-annotation.md](primitive-annotation.md)). **Never JetBrains Mono** as a blanket "dev" font.
 
 ---
 
@@ -164,7 +164,7 @@ Four options:
 - **Contrast**: `ink` must hit WCAG AA on `paper`. `muted` must hit AA on `paper` for 11px+ text.
 - **One accent**: pick one color for `accent`. Two accents erases the focal signal.
 - **No rainbow palette**: if your brand ships 8 colors, pick 3 (paper, ink, accent). The rest become `muted` variants.
-- **Serif + sans + mono**: three families, not more. Keep 思源宋體 Noto Serif CJK for `title` and `callout` — the contrast is load-bearing.
+- **Serif + sans + mono**: three families, not more. This profile deliberately runs all-sans for now (user decision, 2026-09-24); the serif contrast is replaced by weight contrast (700 title vs 400 body) — the contrast is load-bearing.
 - **Paper is warm-neutral, not pure white**: pure white turns the design sterile. Pick a cream, bone, or light grey with a hint of warmth.
 - **Dot pattern is optional, not default**: the 22×22 dot pattern is an opt-in "dotted paper" variant (good for long-form editorial hero diagrams). The default background is a clean `paper` fill, no pattern. When the pattern is enabled, it should sit at ~10% opacity of `ink` on `paper` — visible but quiet.
 - **Container is clean by default**: the diagram sits directly on the page paper, no secondary container background or border. A framed variant (`paper-2` bg + `rule` border + 8px radius + padding) is available as an opt-in for card-heavy layouts, but don't reach for it by default — the extra chrome fights the figure.

@@ -7,6 +7,8 @@
 | `journey-loop.html` | Flowchart＋Funnel | 線性漏斗 vs 消費者決策旅程，紅線為漏斗沒有的兩條回饋路徑 |
 | `threshold-fork.html` | Flowchart | 門檻判定後 Keep／Revise／Pivot 退回流程的不同位置 |
 | `ai-calibration.html` | Data flow | AI 預測 vs 真人訪談校準，落差最大處＝設計洞察 |
+| `service-blueprint.html` | Swimlane | 服務藍圖：畢展報名，紅線為可視線與跨越它的交接 |
+| `heart-gsm.html` | Process | HEART 以任務成功為例：目標 → 訊號 → 指標 → 門檻 |
 
 每張圖都遵守：正交折線加 r=8 圓角、標籤遮罩與線保持 6px、accent（Signal Red）最多 2 個元素、`<title>`／`<desc>` 無障礙契約、中文標籤 12px 以上（寬度每字 1em）。
 

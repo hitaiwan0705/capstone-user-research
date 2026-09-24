@@ -206,19 +206,77 @@ def calibration():
                "同樣三個問題分別交給 AI 扮演的 Persona（模擬）與三位真人（真實資料），逐題比對後，落差最大處就是設計洞察，回填到假設卡。", body)
 
 
+# ---------- 4. 服務藍圖（swimlane） ----------
+def blueprint():
+    a, n = [], []
+    lanes = [("顧客行動", 48), ("前台", 132), ("後台", 216), ("支援流程", 300)]
+    for name, y in lanes:
+        n.append(f'<text x="24" y="{y + 40}" font-family="{SANS}" font-size="12" font-weight="500" fill="{MUTED}">{name}</text>')
+    lines = [(126, "互動線", False), (210, "可視線", True), (294, "內部互動線", False)]
+    z = []
+    for y, t, acc in lines:
+        c = ACCENT if acc else INK
+        op = "1" if acc else "0.3"
+        da = ' stroke-dasharray="6,4"' if acc else ""
+        z.append(f'<line x1="120" y1="{y}" x2="940" y2="{y}" stroke="{c}" stroke-opacity="{op}" stroke-width="{1.6 if acc else 1}"{da}/>')
+        w = up4(text_width(t, 12) + 8)
+        z.append(f'<rect x="{936 - w}" y="{y - 22}" width="{w}" height="16" rx="2" fill="{PAPER}"/><text x="932" y="{y - 10}" text-anchor="end" font-family="{SANS}" font-size="12" font-weight="500" fill="{c}">{t}</text>')
+    a.append(arrow([(312, 84), (344, 84)]))
+    a.append(arrow([(420, 108), (420, 140)]))
+    a.append(label(420, 124, "送出", side="right"))
+    a.append(arrow([(492, 168), (600, 168), (600, 224)], accent=True))
+    a.append(label(546, 168, "寫入名單", accent=True, side="above"))
+    a.append(arrow([(600, 276), (600, 308)]))
+    a.append(label(600, 292, "存放", side="right"))
+    a.append(arrow([(672, 252), (780, 252), (780, 196)]))
+    a.append(label(726, 252, "觸發", side="below"))
+    a.append(arrow([(780, 144), (780, 112)]))
+    a.append(label(780, 128, "送達", side="right"))
+    n.append(node(168, 60, 144, 48, "看到 IG 貼文"))
+    n.append(node(348, 60, 144, 48, "填報名表"))
+    n.append(node(708, 60, 144, 48, "收到確認信"))
+    n.append(node(348, 144, 144, 48, "報名頁"))
+    n.append(node(708, 144, 144, 48, "確認信"))
+    n.append(node(528, 228, 144, 48, "學生整理名單"))
+    n.append(node(528, 312, 144, 48, "Google 試算表", "store"))
+    body = "".join(z) + "".join(a) + "".join(n)
+    return svg("service-blueprint", "0 32 960 344", "服務藍圖：畢展報名",
+               "以畢展報名為例的服務藍圖：顧客看到貼文、填表、收到確認信；前台是報名頁與確認信；可視線以下由學生整理名單並存放在試算表。前台資料跨過可視線寫入後台名單，是最容易出錯的交接。", body)
+
+
+# ---------- 5. HEART：目標 → 訊號 → 指標 → 門檻 ----------
+def heart():
+    a, n = [], []
+    rows = [("H", "滿意 Happiness"), ("E", "投入 Engagement"), ("A", "採用 Adoption"), ("R", "留存 Retention"), ("T", "任務成功 Task success")]
+    ys = [56, 120, 184, 248, 312]
+    a.append(arrow([(240, 336), (300, 336)], accent=True))
+    for x0 in (440, 616, 792):
+        a.append(arrow([(x0, 336), (x0 + 36, 336)]))
+    for (k, t), y in zip(rows, ys):
+        n.append(node(40, y, 200, 48, f"{k}｜{t}", "focal" if k == "T" else "step"))
+    n.append(f'<text x="304" y="284" font-family="{SANS}" font-size="12" font-weight="500" fill="{MUTED}">以 T 為例；其餘四個面向走同一條鏈</text>')
+    n.append(node(304, 304, 136, 64, "目標", sub="找到符合產業的作品"))
+    n.append(node(480, 304, 136, 64, "訊號", sub="使用產業標籤篩選"))
+    n.append(node(656, 304, 136, 64, "指標", sub="篩選後點作品成功率"))
+    n.append(node(832, 304, 112, 64, "門檻", sub="例：≥ 60%"))
+    body = "".join(a) + "".join(n)
+    return svg("heart-gsm", "0 32 960 352", "HEART：從目標到門檻",
+               "HEART 五個面向中，以任務成功為例：目標是找到符合產業的作品，訊號是使用產業標籤篩選，指標是篩選後點擊作品的成功率，最後設定門檻；其餘四個面向走同一條鏈。", body)
+
+
 PAGE = """<!DOCTYPE html>
 <html lang="zh-Hant">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>{title}</title>
-<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&family=Noto+Serif+TC:wght@600;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&family=Noto+Sans+TC:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
 *,*::before,*::after{{box-sizing:border-box;margin:0;padding:0}}
 body{{font-family:{sans};background:{paper};color:{ink};min-height:100vh;display:flex;align-items:center;justify-content:center;padding:3rem 2rem}}
 .frame{{max-width:1200px;width:100%}}
 .eyebrow{{font-family:{mono};font-size:.72rem;font-weight:500;letter-spacing:.12em;text-transform:uppercase;color:{muted};margin-bottom:.5rem}}
-h1{{font-family:{serif};font-size:clamp(1.5rem,2.4vw + .75rem,2rem);font-weight:900;line-height:1.25;margin-bottom:1.5rem}}
+h1{{font-family:{sans};font-size:clamp(1.5rem,2.4vw + .75rem,2rem);font-weight:900;line-height:1.25;margin-bottom:1.5rem}}
 .wrap{{overflow-x:auto}}
 svg{{width:100%;min-width:720px;display:block}}
 .note{{margin-top:1rem;font-size:.85rem;color:{muted};border-top:1px solid #CDCECC;padding-top:.75rem}}
@@ -242,6 +300,10 @@ ITEMS = [
      "教師推論：Keep／Revise／Pivot 為本課教學用語；推翻得越深，回退得越遠。"),
     ("ai-calibration", calibration, "Data flow", "AI 預測與真人訪談的校準流程",
      "Teaching Example：虛線框為模擬，灰底框為真人資料。方法背景：Hämäläinen, Tavast, &amp; Kunnari (2023), CHI ’23."),
+    ("service-blueprint", blueprint, "Swimlane", "服務藍圖：畢展報名",
+     "研究出處：Shostack (1984) 提出服務藍圖與可視線；分層依 Bitner, Ostrom, &amp; Morgan (2008)。Teaching Example：畢展報名流程為教學自製。"),
+    ("heart-gsm", heart, "Process", "HEART：從目標到門檻",
+     "研究出處：Rodden, Hutchinson, &amp; Fu (2010), CHI ’10（HEART 與 Goals–Signals–Metrics）。Teaching Example：畢展網站的目標、訊號、指標與門檻為教學自製；門檻一欄是本課加上的延伸。"),
 ]
 
 if __name__ == "__main__":

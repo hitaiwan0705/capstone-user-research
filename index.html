@@ -10,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#efece4; --ink:#1d1c1a; --ink-2:#4a4741; --muted:#77736b;
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#efece4; --ink:#1d1c1a; --ink-2:#4a4741; --muted:#5f5b54; --on-accent:#ffffff;
   --line:#dcd7cb; --accent:#b4461f; --accent-soft:#f6e3d9;
   --c-src:#1f5fa8; --c-src-bg:#e3edf8; --c-ind:#8a5a00; --c-ind-bg:#f8ecd2;
   --c-ex:#2e7040; --c-ex-bg:#e2f1e5; --c-an:#6b3fa0; --c-an-bg:#eee5f7;
@@ -19,7 +19,7 @@
 }
 @media (prefers-color-scheme: dark){
   :root:not([data-theme="light"]){
-    --bg:#16161a; --surface:#1f1f24; --surface-2:#2a2a31; --ink:#ecebe7; --ink-2:#c3c0b8; --muted:#95928a;
+    --bg:#16161a; --surface:#1f1f24; --surface-2:#2a2a31; --ink:#ecebe7; --ink-2:#c3c0b8; --muted:#b0ada5; --on-accent:#16161a;
     --line:#3a3a42; --accent:#f08a5d; --accent-soft:#3b2620;
     --c-src:#8db8ec; --c-src-bg:#1c2c40; --c-ind:#e8c06a; --c-ind-bg:#3a2f16;
     --c-ex:#8fd3a0; --c-ex-bg:#1c3324; --c-an:#c6a4ef; --c-an-bg:#2e2340;
@@ -27,14 +27,21 @@
   }
 }
 :root[data-theme="dark"]{
-  --bg:#16161a; --surface:#1f1f24; --surface-2:#2a2a31; --ink:#ecebe7; --ink-2:#c3c0b8; --muted:#95928a;
+  --bg:#16161a; --surface:#1f1f24; --surface-2:#2a2a31; --ink:#ecebe7; --ink-2:#c3c0b8; --muted:#b0ada5; --on-accent:#16161a;
   --line:#3a3a42; --accent:#f08a5d; --accent-soft:#3b2620;
   --c-src:#8db8ec; --c-src-bg:#1c2c40; --c-ind:#e8c06a; --c-ind-bg:#3a2f16;
   --c-ex:#8fd3a0; --c-ex-bg:#1c3324; --c-an:#c6a4ef; --c-an-bg:#2e2340;
   --bar:#6fa3e0; --bar-2:#35557d; --shadow:none;
 }
 *{box-sizing:border-box}
-html{scroll-behavior:smooth}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+:focus-visible{outline:3px solid var(--c-src);outline-offset:3px;border-radius:4px}
+.skip{position:absolute;left:-9999px;top:8px;z-index:10;background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:8px}
+.skip:focus{left:16px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+details.data{margin-top:10px;font-size:14px}
+details.data summary{cursor:pointer;color:var(--c-src);padding:8px 0;min-height:44px}
+h2.sub{font-size:20px;font-family:inherit;margin:34px 0 10px}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:17px;-webkit-text-size-adjust:100%}
 a{color:var(--c-src)}
 .wrap{max-width:1180px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
@@ -46,7 +53,7 @@ nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
 nav.toc .t{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;margin-right:4px}
 @media (max-width:900px){nav.toc{position:static;max-height:none;padding:16px 0 0}
   nav.toc .list{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
-  nav.toc a{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--surface)}}
+  nav.toc a{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:10px 14px;background:var(--surface)}}
 main{min-width:0;padding-bottom:80px}
 header.hero{padding:56px 0 28px;border-bottom:1px solid var(--line)}
 .kicker{font-size:13px;letter-spacing:.14em;color:var(--accent);font-weight:700}
@@ -101,19 +108,19 @@ tr:last-child td{border-bottom:none}
 .bad b,.good b{display:block;margin-bottom:4px}
 pre.prompt{white-space:pre-wrap;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:"Noto Sans TC",ui-monospace,monospace;font-size:14.5px;line-height:1.7;margin:0;position:relative}
 .pbox{position:relative;margin:12px 0}
-.copy{position:absolute;top:8px;right:8px;font:inherit;font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:6px;padding:2px 10px;cursor:pointer}
+.copy{position:absolute;top:6px;right:6px;font:inherit;font-size:13px;min-height:36px;min-width:52px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:6px;padding:2px 10px;cursor:pointer}
 .matrix{display:grid;grid-template-columns:34px 1fr 1fr;grid-template-rows:auto auto 30px;gap:6px;max-width:620px;margin:0 auto}
 .matrix .cell{border-radius:10px;padding:12px 14px;font-size:14.5px;min-height:112px}
 .matrix .cell b{display:block;font-size:16px}
 .ylab{grid-row:1/3;grid-column:1;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center}
 .xlab{grid-column:2/4;display:flex;justify-content:space-around;font-size:13px;color:var(--muted)}
-.m-fix{background:var(--accent);color:#fff}
+.m-fix{background:var(--accent);color:var(--on-accent)}
 .m-edge{background:var(--c-an-bg);border:2px solid var(--c-an)}
 .m-quick{background:var(--c-ex-bg)}
 .m-low{background:var(--surface-2);color:var(--ink-2)}
 ul.tight{padding-left:1.2em;margin:8px 0}
 ul.tight li{margin:3px 0}
-.note{font-size:14px;color:var(--muted)}
+.note{font-size:14.5px;color:var(--muted)}
 .decide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
 @media (max-width:640px){.decide{grid-template-columns:minmax(0,1fr)}}
 .decide div{border-radius:12px;padding:14px;border:1px solid var(--line);background:var(--surface)}
@@ -125,7 +132,7 @@ ul.tight li{margin:3px 0}
 .steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700}
 .steps .tm{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:700;font-size:14px}
 ol.refs{padding-left:1.4em;font-size:15px}
-ol.refs li{margin:10px 0}
+ol.refs li{margin:10px 0;overflow-wrap:anywhere}
 ol.refs .ty{font-size:12px}
 footer{padding:40px 0;color:var(--muted);font-size:14px}
 .themebtn{position:fixed;right:14px;bottom:14px;z-index:5;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;box-shadow:var(--shadow)}
@@ -135,10 +142,12 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
 </style>
 </head>
 <body>
+<a class="skip" href="#intro">跳到主要內容</a>
 <button class="themebtn" id="themebtn" type="button" aria-label="切換深淺色">◐ 深淺色</button>
-<div id="tip" role="tooltip"></div>
+<div id="tip" aria-hidden="true"></div>
+<div id="live" class="sr" aria-live="polite"></div>
 <div class="wrap">
-<nav class="toc" aria-label="目錄">
+<nav class="toc" aria-label="課程目錄">
   <b>CONTENTS</b>
   <div class="list">
   <a href="#intro"><span class="t">00</span>課程導覽</a>
@@ -179,7 +188,7 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
     </div>
   </div>
 
-  <h3>先用工業設計的語言對照一次</h3>
+  <h2 class="sub">先用工業設計的語言對照一次</h2>
   <div class="tablewrap"><table>
     <thead><tr><th>UX／行銷工具</th><th>工業設計的對應</th><th>今天要記住的一句話</th></tr></thead>
     <tbody>
@@ -209,6 +218,11 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
       <title id="dtitle">Daniels 1952 逐項篩選後仍屬「平均」的人數</title>
       <desc id="ddesc">從全體 4,063 人開始，依序加入身高、胸圍、袖長、胯高、軀幹圍、臀圍、頸圍、腰圍、大腿圍、胯長十項條件，剩下人數依序為 1,055、302、143、73、28、12、6、3、2、0。</desc>
     </svg>
+    <details class="data"><summary>展開數據表（Daniels, 1952）</summary>
+      <div class="tablewrap"><table><thead><tr><th>步驟</th><th>加入的尺寸</th><th>仍落在平均範圍的人數</th><th>占全體比例</th></tr></thead><tbody>
+      <tr><td>0</td><td>全體受測者</td><td>4,063</td><td>100%</td></tr><tr><td>1</td><td>身高 Stature</td><td>1,055</td><td>26.0%</td></tr><tr><td>2</td><td>胸圍 Chest circumference</td><td>302</td><td>7.4%</td></tr><tr><td>3</td><td>袖長 Sleeve length</td><td>143</td><td>3.5%</td></tr><tr><td>4</td><td>胯高 Crotch height</td><td>73</td><td>1.8%</td></tr><tr><td>5</td><td>軀幹圍 Torso circumference</td><td>28</td><td>0.69%</td></tr><tr><td>6</td><td>臀圍 Hip circumference</td><td>12</td><td>0.30%</td></tr><tr><td>7</td><td>頸圍 Neck circumference</td><td>6</td><td>0.15%</td></tr><tr><td>8</td><td>腰圍 Waist circumference</td><td>3</td><td>0.07%</td></tr><tr><td>9</td><td>大腿圍 Thigh circumference</td><td>2</td><td>0.05%</td></tr><tr><td>10</td><td>胯長 Crotch length</td><td>0</td><td>0%</td></tr>
+      </tbody></table></div>
+    </details>
     <figcaption><span class="tag fig">圖 1｜依原始報告數據重繪</span><b>資料來源：</b>Daniels, G. S. (1952). <i>The "Average Man"?</i> (Technical Note WCRD 53-7). Wright Air Development Center. 原報告全文見 DTIC AD0010203（<a href="https://archive.org/details/DTIC_AD0010203" target="_blank" rel="noopener">Internet Archive 掃描本</a>）。「平均」定義為各尺寸分布中間約 30% 的範圍。長條為各步驟累積後仍在範圍內的人數；滑鼠移到長條上可看數值。</figcaption>
   </figure>
 
@@ -374,8 +388,8 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
   <p>大多數 CJM 的情緒曲線是憑感覺畫的。用 SD 量表後，情緒曲線就變成可以比較、可以前後測的數據。</p>
 
   <h3>痛點排序：嚴重度 × 頻率 × 策略相關性</h3>
-  <div class="matrix" role="img" aria-label="痛點優先矩陣：縱軸嚴重度，橫軸頻率">
-    <div class="ylab">嚴重度 ↑</div>
+  <div class="matrix" role="group" aria-label="痛點優先矩陣：縱軸為嚴重度，橫軸為頻率">
+    <div class="ylab" aria-hidden="true">嚴重度 ↑</div>
     <div class="cell m-edge"><b>Design for Edge</b>高嚴重・低頻率<br>例：視障者完全無法完成報名。<strong>不能只是觀察。</strong></div>
     <div class="cell m-fix"><b>Fix First</b>高嚴重・高頻率<br>多數人卡住、而且卡很久</div>
     <div class="cell m-low"><b>Backlog</b>低嚴重・低頻率<br>先記錄，資源有餘再處理</div>
@@ -428,14 +442,14 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
   </div>
 
   <h4>Prompt A｜整理證據（有訪談資料時）</h4>
-  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">以下是我們訪談 ___ 位使用者得到的資料。
+  <div class="pbox"><button class="copy" type="button" aria-label="複製這段文字">複製</button><pre class="prompt">以下是我們訪談 ___ 位使用者得到的資料。
 請不要創造資料中不存在的需求。
 1. 將資料依「行為、目標、動機、障礙、資訊來源、決策因素」分類。
 2. 找出可能存在的 2–3 種行為模式，寫成 Persona 假設。
 3. 每一項結論都標示：【有證據】【推論】【尚待驗證】。</pre></div>
 
   <h4>Prompt B｜角色扮演＋認知走查</h4>
-  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">你現在扮演以下 Persona：（貼上 Persona）
+  <div class="pbox"><button class="copy" type="button" aria-label="複製這段文字">複製</button><pre class="prompt">你現在扮演以下 Persona：（貼上 Persona）
 情境：（貼上 Scenario，例如：晚上 8:30，朋友問明天聚餐去哪，你只有 10 分鐘。）
 我會逐步給你產品畫面或資訊。每一步請回答：
 1. 你現在想完成什麼？
@@ -446,7 +460,7 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
 規則：你不是來幫我的產品找理由的。如果你會放棄，就直接說放棄，並說明在哪一步。</pre></div>
 
   <h4>Prompt C｜紅隊批評</h4>
-  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">你是嚴格的 UX 研究審查者。請找出以下 Persona 與 Scenario 中：
+  <div class="pbox"><button class="copy" type="button" aria-label="複製這段文字">複製</button><pre class="prompt">你是嚴格的 UX 研究審查者。請找出以下 Persona 與 Scenario 中：
 1. 沒有研究證據的假設
 2. 刻板印象
 3. 自相矛盾的行為
@@ -474,7 +488,7 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
   <div class="flow"><span>證據 Evidence</span><i>→</i><span>假設 Hypothesis</span><i>→</i><span>策略 Strategy</span><i>→</i><span>原型 Prototype</span><i>→</i><span>指標 Metric</span><i>→</i><span class="hl">門檻 Threshold</span></div>
 
   <h3>假設卡</h3>
-  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">我們相信【某行為型 Persona】
+  <div class="pbox"><button class="copy" type="button" aria-label="複製這段文字">複製</button><pre class="prompt">我們相信【某行為型 Persona】
 在【某 Scenario】時，
 主要障礙是【Barrier】（而不是 ＿＿＿）。
 所以我們做【Strategy】。
@@ -516,7 +530,7 @@ svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
   </div>
 
   <h3>三條策略卡：今天實作的最終成果</h3>
-  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">Because  ＿＿＿（洞察）
+  <div class="pbox"><button class="copy" type="button" aria-label="複製這段文字">複製</button><pre class="prompt">Because  ＿＿＿（洞察）
 We will  ＿＿＿（策略）
 We expect ＿＿＿（行為改變）
 We measure ＿＿＿（指標＋門檻）</pre></div>
@@ -630,7 +644,7 @@ We measure ＿＿＿（指標＋門檻）</pre></div>
   document.querySelectorAll('.copy').forEach(function(b){
     b.addEventListener('click',function(){
       var t=b.parentNode.querySelector('pre').innerText;
-      (navigator.clipboard? navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='已複製';setTimeout(function(){b.textContent='複製'},1500)}).catch(function(){b.textContent='請手動選取'});
+      (navigator.clipboard? navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='已複製';document.getElementById('live').textContent='已複製到剪貼簿';setTimeout(function(){b.textContent='複製'},1500)}).catch(function(){b.textContent='請手動選取'});
     });
   });
   // Daniels chart

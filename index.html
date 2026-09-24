@@ -1,0 +1,661 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>畢專使用者研究｜從洞察到可被推翻的策略</title>
+<meta name="description" content="資傳系大四畢業專題講義：Persona、Scenario、CJM × 行銷管理、AI 輔助驗證。每張圖表、案例與引文皆標示出處。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+TC:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f7f5f0; --surface:#ffffff; --surface-2:#efece4; --ink:#1d1c1a; --ink-2:#4a4741; --muted:#77736b;
+  --line:#dcd7cb; --accent:#b4461f; --accent-soft:#f6e3d9;
+  --c-src:#1f5fa8; --c-src-bg:#e3edf8; --c-ind:#8a5a00; --c-ind-bg:#f8ecd2;
+  --c-ex:#2e7040; --c-ex-bg:#e2f1e5; --c-an:#6b3fa0; --c-an-bg:#eee5f7;
+  --bar:#1f5fa8; --bar-2:#9ab8dc;
+  --shadow:0 1px 2px rgba(0,0,0,.05),0 4px 16px rgba(0,0,0,.04);
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#16161a; --surface:#1f1f24; --surface-2:#2a2a31; --ink:#ecebe7; --ink-2:#c3c0b8; --muted:#95928a;
+    --line:#3a3a42; --accent:#f08a5d; --accent-soft:#3b2620;
+    --c-src:#8db8ec; --c-src-bg:#1c2c40; --c-ind:#e8c06a; --c-ind-bg:#3a2f16;
+    --c-ex:#8fd3a0; --c-ex-bg:#1c3324; --c-an:#c6a4ef; --c-an-bg:#2e2340;
+    --bar:#6fa3e0; --bar-2:#35557d; --shadow:none;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#16161a; --surface:#1f1f24; --surface-2:#2a2a31; --ink:#ecebe7; --ink-2:#c3c0b8; --muted:#95928a;
+  --line:#3a3a42; --accent:#f08a5d; --accent-soft:#3b2620;
+  --c-src:#8db8ec; --c-src-bg:#1c2c40; --c-ind:#e8c06a; --c-ind-bg:#3a2f16;
+  --c-ex:#8fd3a0; --c-ex-bg:#1c3324; --c-an:#c6a4ef; --c-an-bg:#2e2340;
+  --bar:#6fa3e0; --bar-2:#35557d; --shadow:none;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;line-height:1.75;font-size:17px;-webkit-text-size-adjust:100%}
+a{color:var(--c-src)}
+.wrap{max-width:1180px;margin:0 auto;padding:0 16px;display:grid;grid-template-columns:220px minmax(0,1fr);gap:40px}
+@media (max-width:900px){.wrap{grid-template-columns:minmax(0,1fr);gap:0}}
+nav.toc{position:sticky;top:0;align-self:start;padding:28px 0;max-height:100vh;overflow:auto;font-size:14px}
+nav.toc b{display:block;font-size:12px;letter-spacing:.12em;color:var(--muted);margin-bottom:8px}
+nav.toc a{display:block;color:var(--ink-2);text-decoration:none;padding:4px 0 4px 10px;border-left:2px solid var(--line)}
+nav.toc a:hover{color:var(--accent);border-color:var(--accent)}
+nav.toc .t{color:var(--muted);font-variant-numeric:tabular-nums;font-size:12px;margin-right:4px}
+@media (max-width:900px){nav.toc{position:static;max-height:none;padding:16px 0 0}
+  nav.toc .list{display:flex;gap:6px;overflow-x:auto;padding-bottom:6px}
+  nav.toc a{white-space:nowrap;border:1px solid var(--line);border-radius:999px;padding:4px 12px;background:var(--surface)}}
+main{min-width:0;padding-bottom:80px}
+header.hero{padding:56px 0 28px;border-bottom:1px solid var(--line)}
+.kicker{font-size:13px;letter-spacing:.14em;color:var(--accent);font-weight:700}
+h1{font-family:"Noto Serif TC",serif;font-weight:900;font-size:clamp(28px,5vw,46px);line-height:1.3;margin:10px 0 14px}
+h2{font-family:"Noto Serif TC",serif;font-size:clamp(24px,3.6vw,32px);line-height:1.35;margin:0 0 6px}
+h3{font-size:20px;margin:34px 0 10px}
+h4{font-size:17px;margin:22px 0 6px}
+.lead{font-size:19px;color:var(--ink-2);max-width:46em}
+.meta{font-size:14px;color:var(--muted);margin-top:16px}
+section.mod{padding:56px 0 8px;border-bottom:1px solid var(--line)}
+.modhead{display:flex;gap:14px;align-items:baseline;flex-wrap:wrap;margin-bottom:8px}
+.time{font-variant-numeric:tabular-nums;background:var(--ink);color:var(--bg);border-radius:6px;padding:2px 10px;font-size:14px;font-weight:700}
+.rhythm{display:flex;flex-wrap:wrap;gap:6px;margin:18px 0 6px;padding:0;list-style:none}
+.rhythm li{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:6px 12px;font-size:14px}
+.rhythm li b{color:var(--accent);margin-right:4px}
+.rhythm li.arrow{border:none;background:none;padding:6px 0;color:var(--muted)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:20px 22px;margin:18px 0;box-shadow:var(--shadow)}
+.card.q{border-left:5px solid var(--accent)}
+.card.q p.big{font-size:21px;font-weight:700;margin:4px 0}
+.grid2{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.grid3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
+@media (max-width:700px){.grid2,.grid3{grid-template-columns:minmax(0,1fr)}}
+.tag{display:inline-block;font-size:12px;font-weight:700;border-radius:5px;padding:1px 8px;margin-right:6px;vertical-align:2px;white-space:nowrap}
+.tag.src{color:var(--c-src);background:var(--c-src-bg)}
+.tag.ind{color:var(--c-ind);background:var(--c-ind-bg)}
+.tag.ex{color:var(--c-ex);background:var(--c-ex-bg)}
+.tag.an{color:var(--c-an);background:var(--c-an-bg)}
+.tag.fig{color:var(--ink-2);background:var(--surface-2)}
+.legendbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:8px 18px;font-size:14px;color:var(--ink-2)}
+figure{margin:22px 0;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:18px 18px 12px;box-shadow:var(--shadow)}
+figure svg{width:100%;height:auto;display:block}
+figcaption{font-size:13.5px;color:var(--muted);border-top:1px dashed var(--line);margin-top:12px;padding-top:10px;line-height:1.6}
+figcaption b{color:var(--ink-2)}
+blockquote{margin:16px 0;padding:14px 18px;background:var(--c-src-bg);border-radius:10px;border-left:4px solid var(--c-src);font-size:15.5px}
+blockquote .zh{display:block;margin-top:8px;color:var(--ink-2)}
+blockquote cite{display:block;margin-top:8px;font-size:13px;color:var(--muted);font-style:normal}
+.tablewrap{overflow-x:auto;margin:16px 0;border:1px solid var(--line);border-radius:12px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:15px;min-width:560px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:var(--surface-2);font-weight:700;font-size:14px}
+tr:last-child td{border-bottom:none}
+.tsrc{font-size:13px;color:var(--muted);padding:8px 12px;border-top:1px dashed var(--line)}
+.flow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:12px 0}
+.flow span{background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:5px 11px;font-size:14.5px}
+.flow span.hl{background:var(--accent-soft);border-color:var(--accent);font-weight:700}
+.flow i{font-style:normal;color:var(--muted)}
+.compare{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px}
+@media (max-width:700px){.compare{grid-template-columns:minmax(0,1fr)}}
+.bad,.good{border-radius:12px;padding:14px 16px;font-size:15.5px}
+.bad{background:var(--surface-2)}
+.good{background:var(--c-ex-bg)}
+.bad b,.good b{display:block;margin-bottom:4px}
+pre.prompt{white-space:pre-wrap;background:var(--surface-2);border:1px solid var(--line);border-radius:10px;padding:14px 16px;font-family:"Noto Sans TC",ui-monospace,monospace;font-size:14.5px;line-height:1.7;margin:0;position:relative}
+.pbox{position:relative;margin:12px 0}
+.copy{position:absolute;top:8px;right:8px;font:inherit;font-size:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink-2);border-radius:6px;padding:2px 10px;cursor:pointer}
+.matrix{display:grid;grid-template-columns:34px 1fr 1fr;grid-template-rows:auto auto 30px;gap:6px;max-width:620px;margin:0 auto}
+.matrix .cell{border-radius:10px;padding:12px 14px;font-size:14.5px;min-height:112px}
+.matrix .cell b{display:block;font-size:16px}
+.ylab{grid-row:1/3;grid-column:1;writing-mode:vertical-rl;transform:rotate(180deg);font-size:13px;color:var(--muted);display:flex;align-items:center;justify-content:center}
+.xlab{grid-column:2/4;display:flex;justify-content:space-around;font-size:13px;color:var(--muted)}
+.m-fix{background:var(--accent);color:#fff}
+.m-edge{background:var(--c-an-bg);border:2px solid var(--c-an)}
+.m-quick{background:var(--c-ex-bg)}
+.m-low{background:var(--surface-2);color:var(--ink-2)}
+ul.tight{padding-left:1.2em;margin:8px 0}
+ul.tight li{margin:3px 0}
+.note{font-size:14px;color:var(--muted)}
+.decide{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;margin:14px 0}
+@media (max-width:640px){.decide{grid-template-columns:minmax(0,1fr)}}
+.decide div{border-radius:12px;padding:14px;border:1px solid var(--line);background:var(--surface)}
+.decide div b{font-size:18px;display:block}
+.decide .k{border-top:5px solid var(--c-ex)} .decide .r{border-top:5px solid var(--c-ind)} .decide .p{border-top:5px solid var(--accent)}
+.homework{background:var(--c-ex-bg);border-radius:14px;padding:18px 20px;margin:18px 0}
+.steps{counter-reset:s;list-style:none;padding:0;margin:14px 0}
+.steps>li{counter-increment:s;position:relative;padding:14px 16px 14px 64px;background:var(--surface);border:1px solid var(--line);border-radius:12px;margin:10px 0}
+.steps>li::before{content:counter(s);position:absolute;left:16px;top:14px;width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--bg);display:flex;align-items:center;justify-content:center;font-weight:700}
+.steps .tm{font-variant-numeric:tabular-nums;color:var(--accent);font-weight:700;font-size:14px}
+ol.refs{padding-left:1.4em;font-size:15px}
+ol.refs li{margin:10px 0}
+ol.refs .ty{font-size:12px}
+footer{padding:40px 0;color:var(--muted);font-size:14px}
+.themebtn{position:fixed;right:14px;bottom:14px;z-index:5;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:6px 14px;font:inherit;font-size:13px;cursor:pointer;box-shadow:var(--shadow)}
+#tip{position:fixed;pointer-events:none;background:var(--ink);color:var(--bg);font-size:13px;padding:6px 10px;border-radius:6px;opacity:0;transition:opacity .1s;z-index:9;max-width:260px}
+svg text{font-family:"Noto Sans TC",system-ui,sans-serif}
+@media print{nav.toc,.themebtn,.copy{display:none}.wrap{display:block}body{font-size:12pt;background:#fff}section.mod{break-inside:auto}figure,.card{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<button class="themebtn" id="themebtn" type="button" aria-label="切換深淺色">◐ 深淺色</button>
+<div id="tip" role="tooltip"></div>
+<div class="wrap">
+<nav class="toc" aria-label="目錄">
+  <b>CONTENTS</b>
+  <div class="list">
+  <a href="#intro"><span class="t">00</span>課程導覽</a>
+  <a href="#m1"><span class="t">0–20</span>Persona</a>
+  <a href="#m2"><span class="t">20–35</span>Scenario + JTBD</a>
+  <a href="#m3"><span class="t">35–60</span>CJM × 行銷</a>
+  <a href="#m4"><span class="t">60–75</span>AI 驗證</a>
+  <a href="#m5"><span class="t">75–90</span>假設卡與門檻</a>
+  <a href="#lab"><span class="t">+60</span>實作：策略畫布</a>
+  <a href="#appx"><span class="t">附錄</span>服務藍圖・HEART</a>
+  <a href="#refs"><span class="t">＃</span>參考文獻</a>
+  </div>
+</nav>
+
+<main>
+<header class="hero" id="intro">
+  <div class="kicker">資訊傳播學系・大四畢業專題｜使用者研究</div>
+  <h1>如何把使用者研究，<br>變成可以被驗證、也可以被推翻的設計策略</h1>
+  <p class="lead">Persona、Scenario、CJM 不是三張要交的圖，而是一條鏈：<strong>洞察 → 策略假設 → 設計決策 → 驗證指標</strong>。今天用工業設計的語言，把設計、行銷、資訊三端接起來。</p>
+  <p class="meta">授課：朱尚禮｜講課 90 分鐘＋實作 60 分鐘｜2026-09-24</p>
+
+  <ol class="rhythm" aria-label="每個模組的固定節奏">
+    <li><b>1</b>CASE 案例</li><li class="arrow">→</li>
+    <li><b>2</b>QUESTION 提問</li><li class="arrow">→</li>
+    <li><b>3</b>MODEL 理論</li><li class="arrow">→</li>
+    <li><b>4</b>DECISION 你的畢專決策</li><li class="arrow">→</li>
+    <li><b>5</b>VALIDATION 驗證</li>
+  </ol>
+
+  <div class="card">
+    <strong>本講義的出處標示規則</strong>（每張圖、每個案例、每段引文都會標註）
+    <div class="legendbox" style="margin-top:10px">
+      <div><span class="tag src">研究出處</span>同儕審查論文、學術專書、原始技術報告</div>
+      <div><span class="tag ind">產業觀察</span>顧問公司、業界機構報告：方法無法外部檢核</div>
+      <div><span class="tag ex">Teaching Example</span>為教學自製的情境，不是研究資料</div>
+      <div><span class="tag an">教師類比／推論</span>授課教師的延伸解讀，並非原文主張</div>
+      <div><span class="tag fig">圖表</span>說明資料來源，以及圖表是「依原文重繪」或「自繪示意」</div>
+    </div>
+  </div>
+
+  <h3>先用工業設計的語言對照一次</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>UX／行銷工具</th><th>工業設計的對應</th><th>今天要記住的一句話</th></tr></thead>
+    <tbody>
+      <tr><td>Segment 分群</td><td>目標族群界定（人因的百分位範圍）</td><td>分群是在決定「涵蓋誰、放棄誰」</td></tr>
+      <tr><td>Persona</td><td>設計對象規格</td><td>不是平均人，而是會造成設計差異的類型</td></tr>
+      <tr><td>Anti-persona</td><td>明確排除的使用者</td><td>行銷的「目標化」本質就是取捨</td></tr>
+      <tr><td>Scenario</td><td>使用情境、任務分析、Storyboard</td><td>要寫「現況」與「介入後」兩種</td></tr>
+      <tr><td>CJM</td><td>產品生命週期：購買 → 使用 → 維護 → 汰換</td><td>同時也是行銷的決策旅程</td></tr>
+      <tr><td>Touchpoint</td><td>介面、部件</td><td>每個介面都是一個溝通點</td></tr>
+      <tr><td>Pain point 排序</td><td>受 FMEA 風險排序邏輯啟發（非完整 FMEA）</td><td>嚴重度 × 頻率 × 策略相關性</td></tr>
+      <tr><td>Strategy</td><td>產品設計規格書（PDS）</td><td>好的策略一定能排除某些方案</td></tr>
+      <tr><td>Validation</td><td>原型測試、可用性測試</td><td>事先定好門檻：什麼結果代表我錯了</td></tr>
+    </tbody>
+  </table>
+  <div class="tsrc"><span class="tag an">教師類比</span>本表為授課教師以工業設計語彙所做的對照，用於幫助理解，並非各方法原始文獻的定義。</div></div>
+</header>
+
+<!-- ===================== M1 ===================== -->
+<section class="mod" id="m1">
+  <div class="modhead"><span class="time">0–20 分</span><h2>模組 1｜Persona：平均人不存在</h2></div>
+
+  <h3><span class="tag src">研究出處</span>CASE：1952 年美國空軍的「平均飛行員」</h3>
+  <p>1950 年代初，美國空軍重新檢討座艙設計。Gilbert S. Daniels 在萊特空軍發展中心整理了 <strong>4,063 名</strong>飛行人員的身體量測資料，挑出 10 項與服裝、座艙設計有關的尺寸。他把各尺寸分布中間<strong>約 30%</strong>的範圍定義為「接近平均」，然後逐項篩選：同時落在每一項平均範圍內的人還剩多少？</p>
+
+  <figure>
+    <svg id="daniels" viewBox="0 0 720 440" role="img" aria-labelledby="dtitle ddesc">
+      <title id="dtitle">Daniels 1952 逐項篩選後仍屬「平均」的人數</title>
+      <desc id="ddesc">從全體 4,063 人開始，依序加入身高、胸圍、袖長、胯高、軀幹圍、臀圍、頸圍、腰圍、大腿圍、胯長十項條件，剩下人數依序為 1,055、302、143、73、28、12、6、3、2、0。</desc>
+    </svg>
+    <figcaption><span class="tag fig">圖 1｜依原始報告數據重繪</span><b>資料來源：</b>Daniels, G. S. (1952). <i>The "Average Man"?</i> (Technical Note WCRD 53-7). Wright Air Development Center. 原報告全文見 DTIC AD0010203（<a href="https://archive.org/details/DTIC_AD0010203" target="_blank" rel="noopener">Internet Archive 掃描本</a>）。「平均」定義為各尺寸分布中間約 30% 的範圍。長條為各步驟累積後仍在範圍內的人數；滑鼠移到長條上可看數值。</figcaption>
+  </figure>
+
+  <blockquote>
+    “…the ‘average man’ is a misleading and illusory concept as a basis for design criteria, and is particularly so when more than one dimension is being considered.”
+    <span class="zh">「以『平均人』作為設計準則的基礎，是誤導而虛幻的概念；當考慮的尺寸不只一個時尤其如此。」（中文為本講義翻譯）</span>
+    <cite>— Daniels (1952), <i>The "Average Man"?</i>, 原文節錄</cite>
+  </blockquote>
+
+  <div class="card q">
+    <span class="note">QUESTION</span>
+    <p class="big">如果我們為「平均使用者」設計，這個平均使用者是誰？</p>
+    <p class="note" style="margin:0">提醒：只做到第 3 項（身高、胸圍、袖長），4,063 人就只剩 143 人（約 3.5%）。</p>
+  </div>
+
+  <h3>MODEL：Persona 保存的是「會造成設計差異的特徵」</h3>
+  <div class="flow"><span>母體 Population</span><i>→</i><span>分群 Segmentation</span><i>→</i><span>行為模式 Behavioral patterns</span><i>→</i><span class="hl">Persona ≠ 平均人</span><i>→</i><span>設計需求 Requirements</span></div>
+  <p>Persona 的目的不是「創造一個看起來很真實的人」，而是<strong>保存會讓 A、B 兩個設計方案產生不同選擇的使用者特徵</strong>。這個方法由 Cooper（1999）提出，Goodwin（2009）發展出以行為變數建立 Persona 的步驟：列出行為變數、把受訪者放上變數軸、找出重複出現的組合、再寫成目標導向的人物。本課原講義（Tim）已有這套流程，今天不重講，只強調它的用途。</p>
+
+  <div class="compare">
+    <div class="bad"><b>✗ 沒有策略力的 Persona</b>小美，22 歲，大學生，喜歡 IG、旅遊與美食。<br><span class="note">→ 對設計沒有任何限制條件。</span></div>
+    <div class="good"><b>✓ 能導出策略的 Persona</b>找餐廳多半發生在朋友群組臨時約聚餐時；願意搜尋但不看長文；先看朋友推薦再看評價；最大的焦慮不是找不到，而是「推薦錯了被朋友嫌」。<br><span class="note">→ 策略：產品不是「幫你找更多餐廳」，而是「讓你敢做決定」。</span></div>
+  </div>
+  <p class="note"><span class="tag ex">Teaching Example</span>上述兩個人物為教學自製，非研究資料。</p>
+
+  <h4>人口統計弱、行為強</h4>
+  <p>分群常見四種依據：地理、人口統計、心理特質、行為（本課原講義 Tim 已整理）。對畢專來說，請優先抓<strong>行為、動機、目標、障礙、資訊接觸管道</strong>，年齡、星座、興趣這類裝飾性資料放最後。</p>
+
+  <h4>Anti-persona 與極端使用者</h4>
+  <ul class="tight">
+    <li><b>Anti-persona</b>：明確寫下「我們不為誰設計」。沒有排除，就沒有定位。</li>
+    <li><b>極端使用者</b>：高齡、單手操作、第一次使用、極度趕時間的人，常把主流使用者「忍住沒說」的問題放大。</li>
+  </ul>
+  <p class="note"><span class="tag an">教師推論</span>Daniels 的研究本身只證明「多維度的平均人不存在」，並沒有討論通用設計。「因此應該為邊界使用者設計」是授課教師從通用設計觀點做的延伸推論，請與原研究分開看待。</p>
+
+  <div class="card q"><span class="note">DECISION｜回到你的畢專</span><p class="big">你的畢專裡，誰是那個「不存在的平均飛行員」？</p></div>
+</section>
+
+<!-- ===================== M2 ===================== -->
+<section class="mod" id="m2">
+  <div class="modhead"><span class="time">20–35 分</span><h2>模組 2｜Scenario + JTBD：什麼時候、為了完成什麼</h2></div>
+
+  <h3><span class="tag ex">Teaching Example</span>CASE：晚上 8:30 的聚餐群組</h3>
+  <p>朋友在群組突然問：「明天聚餐去哪？」你只有 10 分鐘可以回。這個時刻有時間壓力、有社交風險，也有一個要完成的任務，這就是一個 Scenario。</p>
+
+  <h3><span class="tag src">研究出處</span>MODEL：情境要寫兩種</h3>
+  <p>情境式設計（Scenario-based Design）把情境分成「問題情境」和「活動情境」（Rosson &amp; Carroll, 2002）。兩者的差異，就是你的設計介入點，就像畫 Before／After 的 storyboard。</p>
+  <div class="grid2">
+    <div class="card" style="margin:0"><span class="tag fig">問題情境 Problem scenario</span><p style="margin:8px 0 0">晚上 8:30，小組長在群組被問聚餐地點。她打開地圖 App 看了 12 家，每家都要點進去看評論；10 分鐘後還是不敢丟連結，最後回「都可以」。</p></div>
+    <div class="card" style="margin:0"><span class="tag fig">活動情境 Activity scenario</span><p style="margin:8px 0 0">同一時刻，她打開服務，勾選人數與預算，看到 3 家「和你朋友去過的類似」的店，附上一句同儕短評。她直接把卡片丟進群組，2 分鐘內大家按讚。</p></div>
+  </div>
+  <p class="note"><span class="tag ex">Teaching Example</span>兩段情境為教學自製。</p>
+
+  <h4>用一句話寫問題情境</h4>
+  <div class="pbox"><pre class="prompt">當＿＿＿的時候，
+＿＿＿想要＿＿＿，
+但是因為＿＿＿，
+所以目前只能＿＿＿。</pre></div>
+
+  <h3><span class="tag src">研究出處</span>JTBD：Persona 說「誰」，JTBD 說「想完成什麼」</h3>
+  <p>Christensen 等人（2016）主張：顧客不是購買產品，而是「雇用」產品來完成某個任務，而任務同時有<strong>功能、情感、社會</strong>三個面向。把 JTBD 放進 Scenario 的「目標」欄，情境就會自然長出策略。</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>面向</th><th>聚餐例子</th><th>對應的策略方向</th></tr></thead>
+    <tbody>
+      <tr><td>功能性</td><td>10 分鐘內選出一家店</td><td>減少比較步驟</td></tr>
+      <tr><td>情感性</td><td>不想承擔選錯的焦慮</td><td>提供可信的保證</td></tr>
+      <tr><td>社會性</td><td>在朋友面前看起來很會選</td><td>可分享、看起來有品味的卡片</td></tr>
+    </tbody>
+  </table>
+  <div class="tsrc"><span class="tag src">架構</span>Christensen, Hall, Dillon, &amp; Duncan (2016)。<span class="tag ex">Teaching Example</span>表中聚餐例子與策略方向為教學自製。</div></div>
+
+  <div class="card q"><span class="note">DECISION｜回到你的畢專</span><p class="big">你的使用者「雇用」你的作品，是為了完成哪一件事？三個面向各寫一句。</p></div>
+</section>
+
+<!-- ===================== M3 ===================== -->
+<section class="mod" id="m3">
+  <div class="modhead"><span class="time">35–60 分</span><h2>模組 3｜CJM × 行銷：旅程不是漏斗</h2></div>
+
+  <p>CJM 今天分三次升級，不要一次塞滿：</p>
+  <div class="flow"><span class="hl">① UX 旅程</span><i>→</i><span class="hl">② 行銷旅程</span><i>→</i><span>③ 服務系統（見附錄）</span></div>
+
+  <h3>升級 ①　UX 旅程（沿用本課原講義）</h3>
+  <p>本課原講義（盧臆嫣）的 CJM 結構：<b>階段 → 行為 → 接觸點 → 目標 → 痛點 → 想法／說法 → 感受 → 機會點</b>。接觸點的定義是「顧客與服務接觸、互動的人、物與任何媒介」。這一層完全保留。</p>
+
+  <h3>升級 ②　行銷旅程</h3>
+  <h4><span class="tag ind">產業觀察</span>CASE：買完就結束了嗎？</h4>
+  <p>傳統漏斗假設消費者從許多品牌中一路「篩選」到剩下一個。McKinsey 的 Court 等人（2009）分析了<strong>近 20,000 名消費者、橫跨 5 個產業、3 個洲</strong>的購買決策，認為漏斗無法描述數位時代的接觸點，提出一個<strong>迴圈</strong>：初始考慮 → 主動評估 → 購買 → 購後體驗，而購後體驗會直接回饋到下一次的決策，形成「忠誠迴圈」。</p>
+
+  <figure>
+    <svg viewBox="0 0 760 360" role="img" aria-labelledby="mtitle mdesc">
+      <title id="mtitle">線性漏斗與消費者決策旅程迴圈的比較</title>
+      <desc id="mdesc">左側為傳統漏斗：認知、考慮、購買，由寬到窄。右側為迴圈：初始考慮、主動評估、購買、購後體驗四個階段圍成一圈，購後體驗有一條忠誠迴圈箭頭直接回到購買。</desc>
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0 L10,5 L0,10 z" fill="currentColor"/></marker>
+      </defs>
+      <g style="color:var(--muted)">
+        <text x="150" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">傳統漏斗（線性）</text>
+        <polygon points="40,60 260,60 225,130 75,130" fill="var(--surface-2)" stroke="var(--line)"/>
+        <polygon points="75,136 225,136 195,206 105,206" fill="var(--surface-2)" stroke="var(--line)"/>
+        <polygon points="105,212 195,212 172,282 128,282" fill="var(--accent-soft)" stroke="var(--accent)"/>
+        <text x="150" y="101" text-anchor="middle" font-size="15" fill="var(--ink)">認知 Awareness</text>
+        <text x="150" y="177" text-anchor="middle" font-size="15" fill="var(--ink)">考慮 Consider</text>
+        <text x="150" y="253" text-anchor="middle" font-size="15" fill="var(--ink)">購買</text>
+        <text x="150" y="318" text-anchor="middle" font-size="14" fill="var(--muted)">買完之後呢？</text>
+      </g>
+      <line x1="300" y1="30" x2="300" y2="340" stroke="var(--line)" stroke-dasharray="4 4"/>
+      <g style="color:var(--accent)">
+        <text x="540" y="30" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">消費者決策旅程（迴圈）</text>
+        <circle cx="540" cy="190" r="118" fill="none" stroke="var(--line)" stroke-width="2"/>
+        <path d="M 455 108 A 118 118 0 0 1 625 108" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)" style="color:var(--muted)"/>
+        <path d="M 648 150 A 118 118 0 0 1 648 230" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)" style="color:var(--muted)"/>
+        <path d="M 625 272 A 118 118 0 0 1 455 272" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)" style="color:var(--muted)"/>
+        <path d="M 432 230 A 118 118 0 0 1 432 150" fill="none" stroke="var(--muted)" stroke-width="2" marker-end="url(#ah)" style="color:var(--muted)"/>
+        <path d="M 490 300 C 560 250, 600 240, 650 205" fill="none" stroke="var(--accent)" stroke-width="2.5" stroke-dasharray="6 4" marker-end="url(#ah)"/>
+        <rect x="360" y="170" width="120" height="40" rx="8" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="420" y="195" text-anchor="middle" font-size="14" fill="var(--ink)">① 初始考慮</text>
+        <rect x="480" y="55" width="120" height="40" rx="8" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="540" y="80" text-anchor="middle" font-size="14" fill="var(--ink)">② 主動評估</text>
+        <rect x="600" y="170" width="110" height="40" rx="8" fill="var(--accent-soft)" stroke="var(--accent)"/>
+        <text x="655" y="195" text-anchor="middle" font-size="14" fill="var(--ink)">③ 購買</text>
+        <rect x="470" y="288" width="140" height="40" rx="8" fill="var(--surface)" stroke="var(--line)"/>
+        <text x="540" y="313" text-anchor="middle" font-size="14" fill="var(--ink)">④ 購後體驗</text>
+        <text x="628" y="262" text-anchor="start" font-size="13" fill="var(--accent)" font-weight="700">忠誠迴圈</text>
+      </g>
+    </svg>
+    <figcaption><span class="tag fig">圖 2｜依原文文字描述重繪之示意圖，非原圖</span><b>資料來源：</b>Court, D., Elzinga, D., Mulder, S., &amp; Vetvik, O. J. (2009). The consumer decision journey. <i>McKinsey Quarterly</i>. <span class="tag ind">產業觀察</span>顧問公司研究，抽樣與分析方法未公開，無法外部檢核；學術整理請對照 Lemon &amp; Verhoef (2016)。</figcaption>
+  </figure>
+
+  <div class="card"><b>CJM ≠ Funnel：</b>旅程（Journey）是<strong>使用者的經歷</strong>；漏斗（Funnel）是<strong>組織觀察轉換的方式</strong>。CJM 可以疊上漏斗的指標，但畫成單向漏斗會漏掉「分享、回購」這些回饋迴路。</div>
+
+  <h4><span class="tag src">研究出處</span>接觸點由誰擁有？</h4>
+  <p>行銷學界最常被引用的顧客旅程整理（Lemon &amp; Verhoef, 2016）把旅程分為<strong>購前、購買、購後</strong>，並把接觸點依擁有者分成四類。它告訴學生：<strong>有些接觸點你控制不了，只能影響。</strong></p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>接觸點擁有者</th><th>例子</th><th>資傳對應（PESO）</th><th>你能做的</th></tr></thead>
+    <tbody>
+      <tr><td>品牌擁有 Brand-owned</td><td>官網、App、廣告、包裝</td><td>Owned／Paid</td><td>完全設計</td></tr>
+      <tr><td>夥伴擁有 Partner-owned</td><td>通路、平台、合作店家</td><td>Paid／Shared</td><td>協商、提供素材</td></tr>
+      <tr><td>顧客擁有 Customer-owned</td><td>使用者自己使用、自訂的過程</td><td>—</td><td>UX 本身</td></tr>
+      <tr><td>社會／外部 Social/External</td><td>朋友推薦、評論、媒體報導</td><td>Earned／Shared</td><td>只能影響，無法控制</td></tr>
+    </tbody>
+  </table>
+  <div class="tsrc"><span class="tag src">前兩欄分類</span>Lemon &amp; Verhoef (2016)。<span class="tag an">教師對應</span>「PESO」與「你能做的」兩欄為授課教師的對應整理；PESO 模型源自公關實務（Dietrich, 2014），非 Lemon &amp; Verhoef 原文。</div></div>
+
+  <h4><span class="tag src">研究出處</span>5A：資傳學生最該介入的是 Ask</h4>
+  <div class="flow"><span>Aware 認知</span><i>→</i><span>Appeal 吸引</span><i>→</i><span class="hl">Ask 詢問</span><i>→</i><span>Act 行動</span><i>→</i><span>Advocate 倡議</span></div>
+  <p>Kotler 等人（2017）的 5A 把「主動搜尋、問朋友、看評論」獨立成 Ask 階段，這正是資訊設計與內容策略的介入點。</p>
+
+  <h4>Touchpoint ≠ Channel</h4>
+  <p>Channel 是 Instagram；同一個 Channel 裡有很多 Touchpoint：</p>
+  <div class="flow"><span>朋友限動</span><i>→</i><span>廣告</span><i>→</i><span>搜尋品牌帳號</span><i>→</i><span>看 Reels</span><i>→</i><span>點 Bio 連結</span><i>→</i><span>進官網</span><i>→</i><span>留 Email</span></div>
+  <p class="note"><span class="tag ex">Teaching Example</span>每個 Touchpoint 都問三件事：使用者要什麼？品牌要什麼？我們怎麼知道有沒有成功？</p>
+
+  <h3>延伸版 CJM：在原本的模板下方加三列</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>新增列</th><th>要填什麼</th><th>連接到哪一端</th></tr></thead>
+    <tbody>
+      <tr><td>接觸點擁有者</td><td>品牌／夥伴／顧客／外部</td><td>行銷：可控程度</td></tr>
+      <tr><td>SD 情緒量測</td><td>每個接觸點量 3–5 組形容詞對（例：安心–焦慮、專業–業餘），7 點量表</td><td>設計：感性工學；行銷：品牌形象</td></tr>
+      <tr><td>KPI</td><td>微轉換（停留、點擊、收藏）或巨轉換（報名、購買、訂閱）</td><td>資訊：可量測</td></tr>
+    </tbody>
+  </table>
+  <div class="tsrc"><span class="tag src">方法來源</span>語意差異法：Osgood, Suci, &amp; Tannenbaum (1957)；感性工學：Nagamachi (1995)。<span class="tag an">教師推論</span>把 SD 量表放進 CJM 情緒列，是授課教師提出的教學做法，不是既有 CJM 文獻的標準步驟。</div></div>
+  <p>大多數 CJM 的情緒曲線是憑感覺畫的。用 SD 量表後，情緒曲線就變成可以比較、可以前後測的數據。</p>
+
+  <h3>痛點排序：嚴重度 × 頻率 × 策略相關性</h3>
+  <div class="matrix" role="img" aria-label="痛點優先矩陣：縱軸嚴重度，橫軸頻率">
+    <div class="ylab">嚴重度 ↑</div>
+    <div class="cell m-edge"><b>Design for Edge</b>高嚴重・低頻率<br>例：視障者完全無法完成報名。<strong>不能只是觀察。</strong></div>
+    <div class="cell m-fix"><b>Fix First</b>高嚴重・高頻率<br>多數人卡住、而且卡很久</div>
+    <div class="cell m-low"><b>Backlog</b>低嚴重・低頻率<br>先記錄，資源有餘再處理</div>
+    <div class="cell m-quick"><b>Quick Win</b>低嚴重・高頻率<br>小改動就能改善很多人</div>
+    <div class="xlab"><span>低頻率</span><span>頻率 Frequency →</span><span>高頻率</span></div>
+  </div>
+  <p class="note"><span class="tag fig">圖 3｜自繪示意</span><span class="tag an">教師推論</span>受 FMEA 風險排序邏輯啟發，但<strong>不是完整 FMEA</strong>（正式 FMEA 包含嚴重度、發生度、偵測度三項，見 IEC 60812:2018）。左上格命名為「Design for Edge」而非「觀察」，是依通用設計觀點所做的調整。四格排完後，再用「和我的策略有沒有關係」篩一次。</p>
+
+  <div class="card q"><span class="note">DECISION｜回到你的畢專</span><p class="big">資傳畢專最常見的盲點：急著「宣傳一個東西」，卻沒先證明「它值得被宣傳」。你的 CJM 前半段（問題存在嗎？）有證據嗎？</p></div>
+</section>
+
+<!-- ===================== M4 ===================== -->
+<section class="mod" id="m4">
+  <div class="modhead"><span class="time">60–75 分</span><h2>模組 4｜AI 驗證：AI 產生假設，不產生證據</h2></div>
+
+  <h3><span class="tag src">研究出處</span>CASE：用 GPT-3 假扮受訪者，能騙過研究者嗎？</h3>
+  <p>Hämäläinen、Tavast 與 Kunnari（CHI 2023）用 GPT-3 產生「把電玩當成藝術來體驗」的開放式問卷回答，再和真人回答比較：研究者分不分得出來？錯在哪裡？內容和真人有多像？</p>
+  <blockquote>
+    “We conclude that GPT-3 can, in this context, yield believable accounts of HCI experiences. Given the low cost and high speed of LLM data generation, synthetic data should be useful in ideating and piloting new experiments, although any findings must obviously always be validated with real data.”
+    <span class="zh">「我們的結論是：在此情境下，GPT-3 能產生可信的 HCI 經驗敘述。由於 LLM 產生資料成本低、速度快，合成資料應有助於構想與前測新實驗，但任何發現顯然都必須以真實資料驗證。」（中文為本講義翻譯）</span>
+    <cite>— Hämäläinen, Tavast, &amp; Kunnari (2023), CHI ’23 論文摘要節錄</cite>
+  </blockquote>
+
+  <figure>
+    <svg viewBox="0 0 720 250" role="img" aria-labelledby="atitle adesc">
+      <title id="atitle">LLM 合成使用者的優勢與疑慮</title>
+      <desc id="adesc">左欄三項優勢：可信、快速、便宜。右欄三項疑慮：多樣性、偏誤、效度。下方結論：適合形成假設與前測，必須以真人驗證。</desc>
+      <rect x="20" y="20" width="320" height="140" rx="12" fill="var(--c-ex-bg)"/>
+      <text x="40" y="52" font-size="16" font-weight="700" fill="var(--c-ex)">✓ 做得到</text>
+      <text x="40" y="84" font-size="15" fill="var(--ink)">可信 Plausible：讀起來像真人</text>
+      <text x="40" y="112" font-size="15" fill="var(--ink)">快速 Fast</text>
+      <text x="40" y="140" font-size="15" fill="var(--ink)">便宜 Cheap</text>
+      <rect x="380" y="20" width="320" height="140" rx="12" fill="var(--c-ind-bg)"/>
+      <text x="400" y="52" font-size="16" font-weight="700" fill="var(--c-ind)">? 要小心</text>
+      <text x="400" y="84" font-size="15" fill="var(--ink)">多樣性 Diversity：回答較同質</text>
+      <text x="400" y="112" font-size="15" fill="var(--ink)">偏誤 Bias：異常與刻板內容</text>
+      <text x="400" y="140" font-size="15" fill="var(--ink)">效度 Validity：不等於真人經驗</text>
+      <rect x="120" y="182" width="480" height="50" rx="12" fill="var(--accent-soft)" stroke="var(--accent)"/>
+      <text x="360" y="213" text-anchor="middle" font-size="16" font-weight="700" fill="var(--ink)">適合：形成假設、前測 → 必須：真人驗證</text>
+    </svg>
+    <figcaption><span class="tag fig">圖 4｜依論文結論整理之自繪示意</span><b>資料來源：</b>Hämäläinen, P., Tavast, M., &amp; Kunnari, A. (2023). Evaluating large language models in generating synthetic HCI research data: A case study. <i>CHI ’23</i>. <a href="https://doi.org/10.1145/3544548.3580688" target="_blank" rel="noopener">doi:10.1145/3544548.3580688</a>。請注意：該研究只針對單一主題與 GPT-3，結論不宜直接外推到所有模型與題目。</figcaption>
+  </figure>
+
+  <h3>MODEL：讓 AI 擔任四種角色，而不是當受訪者</h3>
+  <div class="grid2">
+    <div class="card" style="margin:0"><b>① 假設萃取器</b><br>把企劃書或 Persona 交給 AI，請它列出所有未經證實的假設，並依風險排序。</div>
+    <div class="card" style="margin:0"><b>② 認知走查模擬器</b><br>AI 扮演 Persona，逐一走過 CJM 每個接觸點，說出困惑點。這就是 Cognitive Walkthrough。</div>
+    <div class="card" style="margin:0"><b>③ 紅隊批評者</b><br>專門攻擊 Persona 的刻板印象、自相矛盾與被遺漏的極端使用者。</div>
+    <div class="card" style="margin:0"><b>④ 訪談題目產生器</b><br>根據最危險的假設，產生 5 題開放式訪談題目，交給真人回答。</div>
+  </div>
+
+  <h4>Prompt A｜整理證據（有訪談資料時）</h4>
+  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">以下是我們訪談 ___ 位使用者得到的資料。
+請不要創造資料中不存在的需求。
+1. 將資料依「行為、目標、動機、障礙、資訊來源、決策因素」分類。
+2. 找出可能存在的 2–3 種行為模式，寫成 Persona 假設。
+3. 每一項結論都標示：【有證據】【推論】【尚待驗證】。</pre></div>
+
+  <h4>Prompt B｜角色扮演＋認知走查</h4>
+  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">你現在扮演以下 Persona：（貼上 Persona）
+情境：（貼上 Scenario，例如：晚上 8:30，朋友問明天聚餐去哪，你只有 10 分鐘。）
+我會逐步給你產品畫面或資訊。每一步請回答：
+1. 你現在想完成什麼？
+2. 你注意到什麼？
+3. 你會做什麼？
+4. 哪裡讓你猶豫？
+5. 下一步你可能跑去哪個平台？
+規則：你不是來幫我的產品找理由的。如果你會放棄，就直接說放棄，並說明在哪一步。</pre></div>
+
+  <h4>Prompt C｜紅隊批評</h4>
+  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">你是嚴格的 UX 研究審查者。請找出以下 Persona 與 Scenario 中：
+1. 沒有研究證據的假設
+2. 刻板印象
+3. 自相矛盾的行為
+4. 被忽略的極端使用者
+5. 哪三項假設如果錯了，整個設計策略就會失敗
+最後提出 5 題可以問真人的開放式訪談問題。不要稱讚我。</pre></div>
+  <p class="note"><span class="tag ex">Teaching Example</span>以上 Prompt 為教學自製。另一個防迎合技巧：換個說法問同一件事，檢查 AI 前後回答是否一致。</p>
+
+  <div class="homework">
+    <b>回家作業｜AI 預測 vs 真人校準</b>
+    <ol class="tight">
+      <li>課堂上讓 AI 扮演你的 Persona，回答 3 個關鍵問題，把答案存下來。</li>
+      <li>課後訪談 3 位真人，問同樣的 3 個問題。</li>
+      <li>下週比對兩者落差。<strong>落差最大的地方，通常就是真正的設計洞察。</strong></li>
+    </ol>
+    <p class="note" style="margin:0">所有 AI 產生的內容，在報告中一律標示「Assumption／AI simulation」，不可寫成「Research finding」。</p>
+  </div>
+</section>
+
+<!-- ===================== M5 ===================== -->
+<section class="mod" id="m5">
+  <div class="modhead"><span class="time">75–90 分</span><h2>模組 5｜假設卡與淘汰門檻</h2></div>
+  <p><strong>驗證不是證明自己是對的，而是設計一個有機會證明自己錯的方法。</strong>沒有事先寫下「什麼結果代表我錯了」，所有驗證都會「成功」。</p>
+
+  <div class="flow"><span>證據 Evidence</span><i>→</i><span>假設 Hypothesis</span><i>→</i><span>策略 Strategy</span><i>→</i><span>原型 Prototype</span><i>→</i><span>指標 Metric</span><i>→</i><span class="hl">門檻 Threshold</span></div>
+
+  <h3>假設卡</h3>
+  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">我們相信【某行為型 Persona】
+在【某 Scenario】時，
+主要障礙是【Barrier】（而不是 ＿＿＿）。
+所以我們做【Strategy】。
+我們預期【行為改變】，用【指標】量測。
+若【指標】未達【門檻】，我們就修正這個假設。
+最危險的假設是：＿＿＿（如果錯了，整個畢專方向就要轉彎）</pre></div>
+
+  <div class="card"><span class="tag ex">Teaching Example</span><b>畢展宣傳型畢專</b>
+    <ul class="tight">
+      <li>我們相信「想被業界看見的大四生」在畢展前兩個月，主要障礙是<b>不知道找誰</b>，而不是作品不夠好。</li>
+      <li>策略：作品頁加上產業標籤，並設計精準邀請機制。</li>
+      <li>門檻：訪談 5 位學生，若少於 3 人把「不知道找誰」排在前兩名障礙，就修正假設。</li>
+    </ul>
+  </div>
+
+  <h3>門檻之後：Keep／Revise／Pivot</h3>
+  <div class="decide">
+    <div class="k"><b>Keep 保留</b>達到門檻，進入下一輪原型迭代。</div>
+    <div class="r"><b>Revise 修正</b>部分成立，調整 Persona 或策略的某一欄。</div>
+    <div class="p"><b>Pivot 轉向</b>最危險的假設被推翻，換一個障礙或對象。</div>
+  </div>
+  <p class="note">被推翻的是<strong>假設</strong>，不是整個專題。用「Kill」會讓人傾向操弄結果來避免失敗，這正是我們要防止的。</p>
+
+  <h3>驗證要分層級</h3>
+  <div class="tablewrap"><table>
+    <thead><tr><th>層級</th><th>驗證什麼</th><th>方法</th><th>工業設計對應</th></tr></thead>
+    <tbody>
+      <tr><td>L1 存在性</td><td>這種行為模式真的存在嗎？</td><td>5–8 人訪談、觀察</td><td>使用者調查</td></tr>
+      <tr><td>L2 區辨性</td><td>A、B 兩型的人做法真的不同嗎？</td><td>問卷＋交叉比對</td><td>族群差異分析</td></tr>
+      <tr><td>L3 有效性</td><td>我們的介入真的改變了行為嗎？</td><td>原型測試、A/B、點擊率</td><td>原型測試</td></tr>
+    </tbody>
+  </table>
+  <div class="tsrc"><span class="tag an">教師整理</span>三層級為授課教師的教學分類。大四畢專通常做得到 L1 加一部分 L3，請誠實標示，不要假裝做了 L2。</div></div>
+
+  <div class="card" style="border-left:5px solid var(--c-ind)">
+    <b>門檻的統計限制（請一定要讀）</b>
+    <p style="margin:6px 0 0">「5 人中少於 3 人就修正」是<strong>決策規則</strong>，不是統計檢定。Nielsen（2000）「測 5 位使用者就夠」談的是<strong>可用性問題的發現率</strong>，不能用來推論「多數使用者都這樣」。</p>
+    <p style="margin:6px 0 0"><b>門檻用來決定下一步，不用來宣稱普遍性。</b></p>
+  </div>
+
+  <h3>三條策略卡：今天實作的最終成果</h3>
+  <div class="pbox"><button class="copy" type="button">複製</button><pre class="prompt">Because  ＿＿＿（洞察）
+We will  ＿＿＿（策略）
+We expect ＿＿＿（行為改變）
+We measure ＿＿＿（指標＋門檻）</pre></div>
+  <p class="note"><span class="tag ex">Teaching Example</span>Because 新手害怕選錯而不是缺資訊，We will 優先提供同儕案例而非更多規格，We expect 使用者更快進入選擇，We measure 決策時間與詳情頁到報名按鈕的轉換率（門檻自訂）。</p>
+</section>
+
+<!-- ===================== LAB ===================== -->
+<section class="mod" id="lab">
+  <div class="modhead"><span class="time">實作 60 分</span><h2>畢專策略畫布：每組用自己的畢專做</h2></div>
+  <p>60 分鐘蒐集不到真實資料，所以今天的成果定位是<strong>「假設卡＋驗證計畫」</strong>。真人訪談與 AI 校準比對，留到回家作業。</p>
+  <ol class="steps">
+    <li><span class="tm">0–15 分</span>　<b>Persona 假設</b><br>只能寫：行為、目標、動機、障礙、觸發點、資訊管道，另寫 1 個 Anti-persona。<br><span class="note">規則：有 3 筆以上訪談證據之前，不准放照片、不准取名字。</span></li>
+    <li><span class="tm">15–25 分</span>　<b>Scenario</b><br>用「當＿＿的時候…」句型寫問題情境，再寫一段活動情境。目標欄用 JTBD 三面向。</li>
+    <li><span class="tm">25–40 分</span>　<b>Mini CJM</b><br>階段只畫：發現 → 考慮 → 行動 → 使用 → 分享／回訪（最後一段畫回箭頭）。每階段填：行為、接觸點、痛點、情緒、機會，加上接觸點擁有者與 KPI。</li>
+    <li><span class="tm">40–50 分</span>　<b>AI 壓力測試</b><br>用 Prompt B 走查一次、Prompt C 批評一次。把 AI 指出的假設全部標成「待驗證」。</li>
+    <li><span class="tm">50–60 分</span>　<b>假設卡＋三條策略卡</b><br>每組交：1 張假設卡（含門檻與最危險假設）、3 條策略卡、1 份下週訪談計畫（3 人 × 3 題）。</li>
+  </ol>
+</section>
+
+<!-- ===================== APPENDIX ===================== -->
+<section class="mod" id="appx">
+  <div class="modhead"><span class="time">附錄</span><h2>下週延伸：服務藍圖與 HEART</h2></div>
+  <p>這兩個工具今天只帶過。等大家的 CJM 畫出來，才會有「前台體驗是誰做出來的？」、「變好是好多少？」的感覺。</p>
+
+  <h3><span class="tag src">研究出處</span>服務藍圖：CJM 往下展開</h3>
+  <figure>
+    <svg viewBox="0 0 720 330" role="img" aria-labelledby="btitle bdesc">
+      <title id="btitle">服務藍圖的層級結構</title>
+      <desc id="bdesc">由上而下四個泳道：顧客行動、前台、後台、支援流程。之間依序以互動線、可視線、內部互動線分隔。</desc>
+      <g font-size="15">
+        <rect x="20" y="20" width="680" height="54" rx="8" fill="var(--c-src-bg)"/><text x="40" y="53" fill="var(--ink)" font-weight="700">顧客行動 Customer actions</text><text x="680" y="53" text-anchor="end" fill="var(--ink-2)" font-size="13">＝ 你的 CJM</text>
+        <line x1="20" y1="90" x2="700" y2="90" stroke="var(--ink-2)" stroke-width="1.5"/><text x="700" y="106" text-anchor="end" fill="var(--muted)" font-size="12">互動線 line of interaction</text>
+        <rect x="20" y="112" width="680" height="54" rx="8" fill="var(--surface-2)"/><text x="40" y="145" fill="var(--ink)" font-weight="700">前台 Onstage／Frontstage</text><text x="680" y="145" text-anchor="end" fill="var(--ink-2)" font-size="13">顧客看得到的人與介面</text>
+        <line x1="20" y1="182" x2="700" y2="182" stroke="var(--accent)" stroke-width="2" stroke-dasharray="8 5"/><text x="700" y="198" text-anchor="end" fill="var(--accent)" font-size="12" font-weight="700">可視線 line of visibility</text>
+        <rect x="20" y="204" width="680" height="54" rx="8" fill="var(--surface-2)"/><text x="40" y="237" fill="var(--ink)" font-weight="700">後台 Backstage</text><text x="680" y="237" text-anchor="end" fill="var(--ink-2)" font-size="13">顧客看不到的作業</text>
+        <line x1="20" y1="268" x2="700" y2="268" stroke="var(--ink-2)" stroke-width="1" stroke-dasharray="3 3"/><text x="700" y="282" text-anchor="end" fill="var(--muted)" font-size="12">內部互動線</text>
+        <rect x="20" y="286" width="680" height="38" rx="8" fill="var(--surface-2)"/><text x="40" y="311" fill="var(--ink)" font-weight="700">支援流程 Support processes</text><text x="680" y="311" text-anchor="end" fill="var(--ink-2)" font-size="13">系統、資料庫、外部夥伴</text>
+      </g>
+    </svg>
+    <figcaption><span class="tag fig">圖 5｜依文獻描述自繪之示意圖</span><b>資料來源：</b>服務藍圖與「可視線」概念由 Shostack (1984) 提出；此處分層結構依 Bitner, Ostrom, &amp; Morgan (2008) 的整理。<span class="tag an">教師類比</span>「CJM 是產品外觀與使用流程，服務藍圖是爆炸圖加製程」為授課教師的工業設計類比，非 Shostack 原文。</figcaption>
+  </figure>
+
+  <h3><span class="tag src">研究出處</span>HEART：「使用體驗變好了」是好多少？</h3>
+  <p>Google 的 Rodden、Hutchinson 與 Fu（CHI 2010）提出 HEART 五個面向，並用「目標 → 訊號 → 指標」三步驟，把產品目標轉成可量測的數字。它能同時對上 UX 與行銷 KPI。</p>
+  <div class="tablewrap"><table>
+    <thead><tr><th>面向</th><th>目標 Goal</th><th>訊號 Signal</th><th>指標 Metric</th></tr></thead>
+    <tbody>
+      <tr><td><b>H</b>appiness 滿意</td><td>觀展者覺得作品頁專業</td><td>SD 量表回饋</td><td>「專業–業餘」平均分數</td></tr>
+      <tr><td><b>E</b>ngagement 投入</td><td>業界願意多看幾件作品</td><td>瀏覽作品頁</td><td>每次造訪瀏覽的作品數</td></tr>
+      <tr><td><b>A</b>doption 採用</td><td>業界人士願意登記</td><td>送出 RSVP</td><td>RSVP 數／邀請數</td></tr>
+      <tr><td><b>R</b>etention 留存</td><td>展後仍會回來看</td><td>再次造訪</td><td>30 天回訪率</td></tr>
+      <tr><td><b>T</b>ask success 任務成功</td><td>找到符合產業的作品</td><td>使用產業標籤篩選</td><td>篩選後點擊作品的成功率、耗時</td></tr>
+    </tbody>
+  </table>
+  <div class="tsrc"><span class="tag src">架構</span>Rodden, Hutchinson, &amp; Fu (2010)。<span class="tag ex">Teaching Example</span>表中「畢展網站」的目標、訊號與指標為教學自製。</div></div>
+
+  <h3>其他可補充的行銷與資訊框架（一行帶過）</h3>
+  <ul class="tight">
+    <li><b>STP</b>（區隔、目標化、定位）：Persona 是 T 的具體化，定位陳述就是 Strategy 的一句話版本。</li>
+    <li><b>AARRR</b>（獲取、啟動、留存、營收、推薦）：McClure (2007) 提出的新創指標，適合平台型畢專。<span class="tag ind">產業觀察</span></li>
+    <li><b>質化＋量化三角檢證</b>：訪談回答「是什麼、為什麼」，數據回答「有多少」。</li>
+  </ul>
+</section>
+
+<!-- ===================== REFS ===================== -->
+<section class="mod" id="refs">
+  <h2>參考文獻</h2>
+  <p class="note">依 APA 7 格式。標籤表示來源性質。連結於 2026-09-24 確認；外部網站可能改動路徑。</p>
+  <ol class="refs">
+    <li><span class="tag src ty">技術報告</span>Daniels, G. S. (1952). <i>The "average man"?</i> (Technical Note WCRD 53-7). Wright Air Development Center, Wright-Patterson Air Force Base. DTIC AD0010203. <a href="https://archive.org/details/DTIC_AD0010203" target="_blank" rel="noopener">https://archive.org/details/DTIC_AD0010203</a></li>
+    <li><span class="tag src ty">同儕審查</span>Hämäläinen, P., Tavast, M., &amp; Kunnari, A. (2023). Evaluating large language models in generating synthetic HCI research data: A case study. In <i>Proceedings of the 2023 CHI Conference on Human Factors in Computing Systems</i>. ACM. <a href="https://doi.org/10.1145/3544548.3580688" target="_blank" rel="noopener">https://doi.org/10.1145/3544548.3580688</a></li>
+    <li><span class="tag src ty">同儕審查</span>Lemon, K. N., &amp; Verhoef, P. C. (2016). Understanding customer experience throughout the customer journey. <i>Journal of Marketing, 80</i>(6), 69–96. <a href="https://doi.org/10.1509/jm.15.0420" target="_blank" rel="noopener">https://doi.org/10.1509/jm.15.0420</a></li>
+    <li><span class="tag ind ty">產業觀察</span>Court, D., Elzinga, D., Mulder, S., &amp; Vetvik, O. J. (2009, June 1). The consumer decision journey. <i>McKinsey Quarterly</i>. <a href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-consumer-decision-journey" target="_blank" rel="noopener">mckinsey.com</a></li>
+    <li><span class="tag src ty">同儕審查</span>Rodden, K., Hutchinson, H., &amp; Fu, X. (2010). Measuring the user experience on a large scale: User-centered metrics for web applications. In <i>Proceedings of CHI 2010</i> (pp. 2395–2398). ACM. <a href="https://doi.org/10.1145/1753326.1753687" target="_blank" rel="noopener">https://doi.org/10.1145/1753326.1753687</a></li>
+    <li><span class="tag src ty">期刊</span>Shostack, G. L. (1984). Designing services that deliver. <i>Harvard Business Review, 62</i>(1), 133–139. <a href="https://hbr.org/1984/01/designing-services-that-deliver" target="_blank" rel="noopener">hbr.org</a></li>
+    <li><span class="tag src ty">同儕審查</span>Bitner, M. J., Ostrom, A. L., &amp; Morgan, F. N. (2008). Service blueprinting: A practical technique for service innovation. <i>California Management Review, 50</i>(3), 66–94. <a href="https://doi.org/10.2307/41166446" target="_blank" rel="noopener">https://doi.org/10.2307/41166446</a></li>
+    <li><span class="tag src ty">期刊</span>Christensen, C. M., Hall, T., Dillon, K., &amp; Duncan, D. S. (2016). Know your customers’ “jobs to be done.” <i>Harvard Business Review, 94</i>(9), 54–62. <a href="https://hbr.org/2016/09/know-your-customers-jobs-to-be-done" target="_blank" rel="noopener">hbr.org</a></li>
+    <li><span class="tag src ty">專書</span>Rosson, M. B., &amp; Carroll, J. M. (2002). <i>Usability engineering: Scenario-based development of human-computer interaction</i>. Morgan Kaufmann.</li>
+    <li><span class="tag src ty">專書</span>Cooper, A. (1999). <i>The inmates are running the asylum</i>. Sams.</li>
+    <li><span class="tag src ty">專書</span>Goodwin, K. (2009). <i>Designing for the digital age: How to create human-centered products and services</i>. Wiley.</li>
+    <li><span class="tag src ty">專書</span>Kotler, P., Kartajaya, H., &amp; Setiawan, I. (2017). <i>Marketing 4.0: Moving from traditional to digital</i>. Wiley.</li>
+    <li><span class="tag src ty">專書</span>Osgood, C. E., Suci, G. J., &amp; Tannenbaum, P. H. (1957). <i>The measurement of meaning</i>. University of Illinois Press.</li>
+    <li><span class="tag src ty">同儕審查</span>Nagamachi, M. (1995). Kansei engineering: A new ergonomic consumer-oriented technology for product development. <i>International Journal of Industrial Ergonomics, 15</i>(1), 3–11. <a href="https://doi.org/10.1016/0169-8141(94)00052-5" target="_blank" rel="noopener">https://doi.org/10.1016/0169-8141(94)00052-5</a></li>
+    <li><span class="tag ind ty">業界專文</span>Nielsen, J. (2000, March 18). Why you only need to test with 5 users. Nielsen Norman Group. <a href="https://www.nngroup.com/articles/why-you-only-need-to-test-with-5-users/" target="_blank" rel="noopener">nngroup.com</a></li>
+    <li><span class="tag ind ty">業界專文</span>Gibbons, S. (2018). Journey mapping 101. Nielsen Norman Group. <a href="https://www.nngroup.com/articles/journey-mapping-101/" target="_blank" rel="noopener">nngroup.com</a></li>
+    <li><span class="tag ind ty">產業觀察</span>McClure, D. (2007). <i>Startup metrics for pirates: AARRR!</i> [Presentation]. 500 Startups.</li>
+    <li><span class="tag ind ty">產業觀察</span>Dietrich, G. (2014). <i>Spin sucks: Communication and reputation management in the digital age</i>. Que.（PESO 模型）</li>
+    <li><span class="tag src ty">標準</span>International Electrotechnical Commission. (2018). <i>IEC 60812:2018 Failure modes and effects analysis (FMEA and FMECA)</i>.</li>
+    <li><span class="tag fig ty">延伸閱讀</span>Rose, T. (2016). <i>The end of average: How we succeed in a world that values sameness</i>. HarperOne.（Daniels 案例的通俗轉述，本講義數據以原始報告為準）</li>
+    <li><span class="tag fig ty">本課原講義</span>第四堂課講義：Persona（Tim）；Customer Journey Map（盧臆嫣）。本頁引用其架構時已於內文標示。</li>
+  </ol>
+</section>
+
+<footer>
+  資訊傳播學系・大四畢業專題｜使用者研究講義 v2 ｜ 朱尚禮 整理，內容整理與網頁製作由 AI（Claude）協助，數據與引文已對照原始來源。<br>
+  標籤說明：研究出處＝學術來源；產業觀察＝業界報告；Teaching Example＝教學自製情境；教師類比／推論＝授課教師延伸解讀。
+</footer>
+</main>
+</div>
+
+<script>
+(function(){
+  // theme toggle
+  var root=document.documentElement, btn=document.getElementById('themebtn');
+  btn.addEventListener('click',function(){
+    var cur=root.getAttribute('data-theme');
+    var dark=cur? cur==='dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
+    root.setAttribute('data-theme', dark?'light':'dark');
+  });
+  // copy buttons
+  document.querySelectorAll('.copy').forEach(function(b){
+    b.addEventListener('click',function(){
+      var t=b.parentNode.querySelector('pre').innerText;
+      (navigator.clipboard? navigator.clipboard.writeText(t):Promise.reject()).then(function(){b.textContent='已複製';setTimeout(function(){b.textContent='複製'},1500)}).catch(function(){b.textContent='請手動選取'});
+    });
+  });
+  // Daniels chart
+  var data=[["全體受測者",4063],["＋身高",1055],["＋胸圍",302],["＋袖長",143],["＋胯高",73],["＋軀幹圍",28],["＋臀圍",12],["＋頸圍",6],["＋腰圍",3],["＋大腿圍",2],["＋胯長",0]];
+  var svg=document.getElementById('daniels'), NS='http://www.w3.org/2000/svg';
+  var x0=130, maxW=500, rowH=34, top=30, max=4063;
+  function el(n,a,txt){var e=document.createElementNS(NS,n);for(var k in a)e.setAttribute(k,a[k]);if(txt!=null)e.textContent=txt;svg.appendChild(e);return e;}
+  el('text',{x:x0,y:18,'font-size':13,fill:'var(--muted)'},'同時落在「平均範圍」內的人數（逐項累加條件）');
+  // gridlines
+  [0,1000,2000,3000,4000].forEach(function(v){var x=x0+v/max*maxW;el('line',{x1:x,x2:x,y1:top,y2:top+rowH*data.length,stroke:'var(--line)','stroke-width':1});el('text',{x:x,y:top+rowH*data.length+18,'font-size':12,fill:'var(--muted)','text-anchor':'middle'},v.toLocaleString());});
+  var tip=document.getElementById('tip');
+  data.forEach(function(d,i){
+    var y=top+i*rowH, w=d[1]===0?0:Math.max(3,d[1]/max*maxW);
+    el('text',{x:x0-10,y:y+rowH/2+5,'font-size':14,'text-anchor':'end',fill:'var(--ink)'},d[0]);
+    if(w>0){el('rect',{x:x0,y:y+7,width:w,height:rowH-14,rx:4,fill:i===0?'var(--bar-2)':'var(--bar)'});}
+    var pct=(d[1]/max*100);
+    var label=d[1].toLocaleString()+' 人'+(i>0?'（'+(pct<1&&pct>0?pct.toFixed(2):pct.toFixed(1))+'%）':'');
+    el('text',{x:x0+w+8,y:y+rowH/2+5,'font-size':14,'font-weight':d[1]===0?700:400,fill:d[1]===0?'var(--accent)':'var(--ink-2)'},d[1]===0?'0 人：沒有任何人':label);
+    var hit=el('rect',{x:0,y:y,width:720,height:rowH,fill:'transparent'});
+    hit.addEventListener('mousemove',function(ev){tip.textContent=(i===0?'全體 ':'加入第 '+i+' 項後 ')+d[0].replace('＋','')+'：'+d[1].toLocaleString()+' 人';tip.style.left=(ev.clientX+12)+'px';tip.style.top=(ev.clientY+12)+'px';tip.style.opacity=1;});
+    hit.addEventListener('mouseleave',function(){tip.style.opacity=0;});
+  });
+  el('text',{x:x0+maxW,y:top+rowH*data.length+36,'font-size':12,fill:'var(--muted)','text-anchor':'end'},'人數');
+  svg.setAttribute('viewBox','0 0 720 '+(top+rowH*data.length+44));
+})();
+</script>
+</body>
+</html>
